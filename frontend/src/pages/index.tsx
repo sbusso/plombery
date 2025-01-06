@@ -29,5 +29,5 @@ const HomePage: React.FC = () => {
     </PageLayout>
   )
 }
-
 export default HomePage
+
