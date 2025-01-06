@@ -10,7 +10,7 @@ export default defineConfig({
     },
   },
   plugins: [react(), splitVendorChunkPlugin()],
-  build: {
-    outDir: path.resolve('..', 'src', 'plombery', 'static'),
-  },
+  // build: {
+  //   outDir: path.resolve('..', 'src', 'plombery', 'static'),
+  // },
 })
