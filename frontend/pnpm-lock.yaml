@@ -21,7 +21,7 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(tailwindcss@3.4.17)
       '@heroicons/react':
-        specifier: ^2.0.16
+        specifier: ^2.2.0
         version: 2.2.0(react@18.3.1)
       '@microlink/react-json-view':
         specifier: ^1.23.0
@@ -42,13 +42,13 @@ importers:
         specifier: ^1.1.0
         version: 1.7.4
       react:
-        specifier: ^18.2.0
+        specifier: ^18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-router-dom:
-        specifier: ^6.17.0
+        specifier: ^6.28.1
         version: 6.28.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-syntax-highlighter:
         specifier: ^15.5.0
@@ -64,34 +64,34 @@ importers:
         specifier: ^7.0.15
         version: 7.0.15
       '@types/node':
-        specifier: ^22.0.0
+        specifier: ^22.10.5
         version: 22.10.5
       '@types/react':
-        specifier: ^18.2.33
+        specifier: ^18.3.18
         version: 18.3.18
       '@types/react-dom':
-        specifier: ^18.2.17
+        specifier: ^18.3.5
         version: 18.3.5(@types/react@18.3.18)
       '@types/react-syntax-highlighter':
-        specifier: ^15.5.9
+        specifier: ^15.5.13
         version: 15.5.13
       '@vitejs/plugin-react':
-        specifier: ^4.0.4
+        specifier: ^4.3.4
         version: 4.3.4(vite@5.4.11(@types/node@22.10.5))
       autoprefixer:
-        specifier: ^10.4.13
+        specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       postcss:
-        specifier: ^8.4.21
+        specifier: ^8.4.49
         version: 8.4.49
       tailwindcss:
-        specifier: ^3.3.5
+        specifier: ^3.4.17
         version: 3.4.17
       typescript:
-        specifier: ^5.2.2
+        specifier: ^5.7.2
         version: 5.7.2
       vite:
-        specifier: ^5.3.5
+        specifier: ^5.4.11
         version: 5.4.11(@types/node@22.10.5)
 
 packages:
