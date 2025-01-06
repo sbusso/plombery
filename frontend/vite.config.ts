@@ -11,25 +11,25 @@ export default defineConfig({
   },
   plugins: [react()],
   build: {
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined, // Disable chunk splitting
-      },
-    },
+    // sourcemap: true,
     // rollupOptions: {
     //   output: {
-    //     manualChunks: (id) => {
-    //       if (id.includes('node_modules')) {
-    //         if (id.includes('handsontable')) return 'table'
-    //         if (id.includes('react')) return 'vendor'
-    //         if (id.includes('@tremor') || id.includes('@headlessui')) return 'ui'
-    //         if (id.includes('@tanstack') || id.includes('socket.io')) return 'data'
-    //         return 'deps'
-    //       }
-    //     },
+    //     manualChunks: undefined, // Disable chunk splitting
     //   },
     // },
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('handsontable')) return 'table'
+            if (id.includes('react')) return 'vendor'
+            if (id.includes('@tremor') || id.includes('@headlessui')) return 'ui'
+            if (id.includes('@tanstack') || id.includes('socket.io')) return 'data'
+            return 'deps'
+          }
+        },
+      },
+    },
     chunkSizeWarningLimit: 500,
   },
 })

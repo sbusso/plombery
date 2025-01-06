@@ -77,13 +77,16 @@ importers:
         version: 15.5.13
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@5.3.5(@types/node@22.10.5))
+        version: 4.3.4(vite@5.4.11(@types/node@22.10.5))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       postcss:
         specifier: ^8.4.49
         version: 8.4.49
+      rollup:
+        specifier: 4.29.2
+        version: 4.29.2
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -91,8 +94,8 @@ importers:
         specifier: ^5.7.2
         version: 5.7.2
       vite:
-        specifier: '=5.3.5'
-        version: 5.3.5(@types/node@22.10.5)
+        specifier: ^5.4.11
+        version: 5.4.11(@types/node@22.10.5)
 
 packages:
 
@@ -1499,8 +1502,8 @@ packages:
   victory-vendor@36.9.2:
     resolution: {integrity: sha512-PnpQQMuxlwYdocC8fIJqVXvkeViHYzotI+NJrCuav0ZYFoq912ZHBk3mCeuj+5/VpodOjPe1z0Fk2ihgzlXqjQ==}
 
-  vite@5.3.5:
-    resolution: {integrity: sha512-MdjglKR6AQXQb9JGiS7Rc2wC6uMjcm7Go/NHNO63EwiJXfuk9PgqiP/n5IDJCziMkfw9n4Ubp7lttNwz+8ZVKA==}
+  vite@5.4.11:
+    resolution: {integrity: sha512-c7jFQRklXua0mTzneGW9QVyxFjUgwcihC4bXEtujIo2ouWCe1Ajt/amn2PCxYnhYfd5k09JX3SB7OYWFKYqj8Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -1508,6 +1511,7 @@ packages:
       less: '*'
       lightningcss: ^1.21.0
       sass: '*'
+      sass-embedded: '*'
       stylus: '*'
       sugarss: '*'
       terser: ^5.4.0
@@ -1519,6 +1523,8 @@ packages:
       lightningcss:
         optional: true
       sass:
+        optional: true
+      sass-embedded:
         optional: true
       stylus:
         optional: true
@@ -2093,14 +2099,14 @@ snapshots:
 
   '@types/unist@2.0.11': {}
 
-  '@vitejs/plugin-react@4.3.4(vite@5.3.5(@types/node@22.10.5))':
+  '@vitejs/plugin-react@4.3.4(vite@5.4.11(@types/node@22.10.5))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.3.5(@types/node@22.10.5)
+      vite: 5.4.11(@types/node@22.10.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -2963,7 +2969,7 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite@5.3.5(@types/node@22.10.5):
+  vite@5.4.11(@types/node@22.10.5):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.49
