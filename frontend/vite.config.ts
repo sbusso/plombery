@@ -11,6 +11,7 @@ export default defineConfig({
   },
   plugins: [react()],
   build: {
+    sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks: (id) => {
