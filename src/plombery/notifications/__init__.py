@@ -55,7 +55,7 @@ class NotificationManager:
 <b>Pipeline</b>: {pipeline.name}
 <b>Status</b>: {get_pipeline_status_verb(pipeline_run.status)}
 
-<a href="{settings.frontend_url}/pipelines/{pipeline_run.pipeline_id}/triggers/{pipeline_run.trigger_id}/runs/{pipeline_run.id}">View run details</a>
+<a href="{settings.frontend_url}pipelines/{pipeline_run.pipeline_id}/triggers/{pipeline_run.trigger_id}/runs/{pipeline_run.id}">View run details</a>
 """
 
         apobj = Apprise()
