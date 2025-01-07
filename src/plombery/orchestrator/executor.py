@@ -2,12 +2,12 @@ from dataclasses import dataclass
 from typing import Any, Callable, Dict, Optional
 from datetime import datetime, timezone
 import inspect
+import logging
 
 from pydantic import BaseModel
 
 from plombery.constants import MANUAL_TRIGGER_ID
 from plombery.exceptions import InvalidDataPath
-from plombery.logger import get_logger
 from plombery.notifications import notification_manager
 from plombery.utils import run_all_coroutines
 from plombery.websocket import sio
@@ -18,6 +18,9 @@ from plombery.orchestrator.data_storage import store_task_output
 from plombery.pipeline.pipeline import Pipeline, Trigger, Task
 from plombery.pipeline.context import pipeline_context, run_context
 from plombery.schemas import PipelineRunStatus, TaskRun
+
+
+logger = logging.getLogger(__name__)
 
 
 def utcnow():
@@ -43,14 +46,15 @@ def _on_pipeline_status_changed(
     pipeline: Pipeline, pipeline_run: PipelineRun, status: PipelineRunStatus
 ):
     update_pipeline_run(pipeline_run, utcnow(), status)
-
     _send_pipeline_event(pipeline, pipeline_run)
-
     return pipeline_run
 
 
 def _send_pipeline_event(pipeline: Pipeline, pipeline_run: PipelineRun):
-    notify_coro = notification_manager.notify(pipeline, pipeline_run)
+    # Only send notifications when the status changes (not on pipeline start)
+    notify_coro = None
+    if pipeline_run.status != PipelineRunStatus.RUNNING:
+        notify_coro = notification_manager.notify(pipeline, pipeline_run)
 
     run = dict(
         id=pipeline_run.id,
@@ -68,7 +72,11 @@ def _send_pipeline_event(pipeline: Pipeline, pipeline_run: PipelineRun):
         ),
     )
 
-    run_all_coroutines([notify_coro, emit_coro])
+    coroutines = [emit_coro]
+    if notify_coro:
+        coroutines.append(notify_coro)
+
+    run_all_coroutines(coroutines)
 
 
 async def run(
@@ -94,8 +102,6 @@ async def run(
 
     pipeline_token = pipeline_context.set(pipeline)
     run_token = run_context.set(pipeline_run)
-
-    logger = get_logger()
 
     logger.info(
         "Executing pipeline `%s` #%d via trigger `%s`",
