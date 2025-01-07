@@ -1,6 +1,6 @@
 import logging
 from typing import List
-from apprise import Apprise, NotifyFormat
+from apprise import Apprise, NotifyFormat, NotifyType
 import apprise
 
 from plombery.config import settings
@@ -39,27 +39,34 @@ class NotificationManager:
     def _get_applicable_rules(
         self, pipeline_run: PipelineRun
     ) -> List[NotificationRule]:
+   
         return [
             rule for rule in self.rules if pipeline_run.status in rule.pipeline_status
         ]
 
     async def notify(self, pipeline: Pipeline, pipeline_run: PipelineRun):
+
         rules = self._get_applicable_rules(pipeline_run)
 
         if not rules:
             return
 
         title = get_message_title(pipeline.name, pipeline_run.status)
-        html = render_pipeline_run(
-            pipeline.name,
-            get_pipeline_status_verb(pipeline_run.status),
-            f"{settings.frontend_url}/pipelines/{pipeline_run.pipeline_id}/triggers/{pipeline_run.trigger_id}/runs/{pipeline_run.id}",
-        )
+        html = f"""
+<b>Pipeline Run Status</b>
+
+<b>Pipeline</b>: {pipeline.name}
+<b>Status</b>: {get_pipeline_status_verb(pipeline_run.status)}
+
+<a href="{settings.frontend_url}/pipelines/{pipeline_run.pipeline_id}/triggers/{pipeline_run.trigger_id}/runs/{pipeline_run.id}">View run details</a>
+"""
+
 
         apobj = Apprise()
 
         for rule in rules:
             for channel in rule.channels:
+
                 apobj.add(channel)
 
         with apprise.LogCapture(level=apprise.logging.INFO) as output:
@@ -72,8 +79,8 @@ class NotificationManager:
             if result:
                 logger.info("Successfully sent notifications")
             else:
-                logger.error(output.read())
-                logger.error("Error sending notifications")
+                logger.error(output.getvalue())
+                logger.error(f"Error sending notifications for pipeline {pipeline.name} run {pipeline_run.id} with rules {rules}")
 
 
 notification_manager = NotificationManager()
